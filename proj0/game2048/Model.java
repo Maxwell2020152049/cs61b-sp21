@@ -169,8 +169,8 @@ public class Model extends Observable {
                             break;
                         }
                         if (t != board.tile(col, row)) {
-                            changed = true;
                             board.move(col, row, t);
+                            changed = true;
                         }
 
                         Tile t2 = getNearestTile(board, col - 1, row, side);
@@ -193,8 +193,8 @@ public class Model extends Observable {
                             break;
                         }
                         if (t != board.tile(col, row)) {
-                            changed = true;
                             board.move(col, row, t);
+                            changed = true;
                         }
 
                         Tile t2 = getNearestTile(board, col + 1, row, side);
@@ -217,8 +217,8 @@ public class Model extends Observable {
                             break;
                         }
                         if (t != board.tile(col, row)) {
-                            changed = true;
                             board.move(col, row, t);
+                            changed = true;
                         }
 
                         Tile t2 = getNearestTile(board, col, row + 1, side);
@@ -241,8 +241,8 @@ public class Model extends Observable {
                             break;
                         }
                         if (t != board.tile(col, row)) {
-                            changed = true;
                             board.move(col, row, t);
+                            changed = true;
                         }
 
                         Tile t2 = getNearestTile(board, col, row - 1, side);
