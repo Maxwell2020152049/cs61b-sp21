@@ -94,6 +94,51 @@ public class Model extends Observable {
         setChanged();
     }
 
+    /**
+     * Return nearest tile in col/row, from row/col.
+     *
+     * Example：
+     * b likes:
+     * |    |    |    |    |
+     * |    |   2|    |    |
+     * |    |    |    |    |
+     * |    |   4|    |    |
+     * getNearestTile(b, 1, 0, Side.SOUTH) return b.tile(1, 0)
+     * getNearestTile(b, 2, 2, Side.EAST) return b.tile(1, 2)
+     * getNearestTile(b, 1, 3, Side.NORTH) return b.tile(1, 2)
+     */
+    public static Tile getNearestTile(Board b, int col, int row, Side side) {
+        int dcol = 0, drow = 0;
+
+        if (side == Side.EAST) {
+            dcol = -1;
+            drow = 0;
+        } else if (side == Side.WEST) {
+            dcol = 1;
+            drow = 0;
+        } else if (side == Side.SOUTH) {
+            dcol = 0;
+            drow = 1;
+        } else if (side == Side.NORTH) {
+            dcol = 0;
+            drow = -1;
+        }
+
+        while (true) {
+            if (Model.outOfBoard(b, col, row)) {
+                break;
+            }
+            if (b.tile(col, row) != null) {
+                return b.tile(col, row);
+            }
+
+            col += dcol;
+            row += drow;
+        }
+
+        return null;
+    }
+
     /** Tilt the board toward SIDE. Return true iff this changes the board.
      *
      * 1. If two Tile objects are adjacent in the direction of motion and have
@@ -114,7 +159,105 @@ public class Model extends Observable {
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
 
+        int b_size = board.size();
+        switch (side) {
+            case EAST:
+                for (int row = 0; row < b_size; row ++) {
+                    for (int col = b_size - 1; col >= 0; col --) {
+                        Tile t = getNearestTile(board, col ,row, side);
+                        if (t == null) {
+                            break;
+                        }
+                        if (t != board.tile(col, row)) {
+                            changed = true;
+                            board.move(col, row, t);
+                        }
 
+                        Tile t2 = getNearestTile(board, col - 1, row, side);
+                        if (t2 == null) {
+                            break;
+                        }
+                        if (t.value() == t2.value()) {
+                            board.move(col, row, t2);
+                            score += 2 * t.value();
+                            changed = true;
+                        }
+                    }
+                }
+                break;
+            case WEST:
+                for (int row = 0; row < b_size; row ++) {
+                    for (int col = 0; col < b_size; col ++) {
+                        Tile t = getNearestTile(board, col ,row, side);
+                        if (t == null) {
+                            break;
+                        }
+                        if (t != board.tile(col, row)) {
+                            changed = true;
+                            board.move(col, row, t);
+                        }
+
+                        Tile t2 = getNearestTile(board, col + 1, row, side);
+                        if (t2 == null) {
+                            break;
+                        }
+                        if (t.value() == t2.value()) {
+                            board.move(col, row, t2);
+                            score += 2 * t.value();
+                            changed = true;
+                        }
+                    }
+                }
+                break;
+            case SOUTH:
+                for (int col = 0; col < b_size; col ++) {
+                    for (int row = 0; row < b_size; row ++) {
+                        Tile t = getNearestTile(board, col ,row, side);
+                        if (t == null) {
+                            break;
+                        }
+                        if (t != board.tile(col, row)) {
+                            changed = true;
+                            board.move(col, row, t);
+                        }
+
+                        Tile t2 = getNearestTile(board, col, row + 1, side);
+                        if (t2 == null) {
+                            break;
+                        }
+                        if (t.value() == t2.value()) {
+                            board.move(col, row, t2);
+                            score += 2 * t.value();
+                            changed = true;
+                        }
+                    }
+                }
+                break;
+            case NORTH:
+                for (int col = 0; col < b_size; col ++) {
+                    for (int row = b_size - 1; row >= 0; row --) {
+                        Tile t = getNearestTile(board, col ,row, side);
+                        if (t == null) {
+                            break;
+                        }
+                        if (t != board.tile(col, row)) {
+                            changed = true;
+                            board.move(col, row, t);
+                        }
+
+                        Tile t2 = getNearestTile(board, col, row - 1, side);
+                        if (t2 == null) {
+                            break;
+                        }
+                        if (t.value() == t2.value()) {
+                            board.move(col, row, t2);
+                            score += 2 * t.value();
+                            changed = true;
+                        }
+                    }
+                }
+                break;
+        }
 
         checkGameOver();
         if (changed) {
