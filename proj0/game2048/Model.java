@@ -334,8 +334,8 @@ public class Model extends Observable {
 
         // delta of x, y
         // UP, DOWN, LEFT, RIGHT
-        int dx[] = {0, 0, -1, 1};
-        int dy[] = {1,-1, 0, 0};
+        int[] dx = {0, 0, -1, 1};
+        int[] dy = {1,-1, 0, 0};
 
         for (int i = 0; i < b.size(); i++) {
             for (int j = 0; j < b.size(); j++) {
