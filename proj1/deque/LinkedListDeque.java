@@ -78,6 +78,10 @@ public class LinkedListDeque<T> {
     }
 
     public T get(int i) {
+        if (isEmpty() || i >= size()) {
+            return null;
+        }
+
         Item p = sentinel.next;
         while (true) {
             if (i == 0) {
