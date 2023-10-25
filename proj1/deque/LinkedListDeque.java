@@ -24,7 +24,7 @@ public class LinkedListDeque<T> {
             return next.get(i - 1);
         }
     }
-    LinkedListDeque() {
+    public LinkedListDeque() {
         sentinel = new Item(null, null, null);
         sentinel.prev = sentinel;
         sentinel.next = sentinel;
