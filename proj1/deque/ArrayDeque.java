@@ -13,7 +13,7 @@ public class ArrayDeque<T> {
     private int head;
     private int last;
 
-    public ArrayDeque() {
+    ArrayDeque() {
         arr = (T[]) new Object[8];
         head = 0;
         last = 0;
@@ -79,7 +79,7 @@ public class ArrayDeque<T> {
             i++;
         }
         head = 0;
-        last = h;
+        last = i;
         arr = new_arr;
     }
 
