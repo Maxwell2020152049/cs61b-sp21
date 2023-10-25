@@ -1,7 +1,5 @@
 package deque;
 
-import afu.org.checkerframework.checker.igj.qual.I;
-
 public class LinkedListDeque<T> {
     private Item sentinel;
     private int size;
