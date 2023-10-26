@@ -9,9 +9,9 @@ package deque;
  * @param <T>
  */
 public class ArrayDeque<T> {
-    private T[] arr;
-    private int head;
-    private int last;
+    protected T[] arr;
+    protected int head;
+    protected int last;
 
     public ArrayDeque() {
         arr = (T[]) new Object[8];
