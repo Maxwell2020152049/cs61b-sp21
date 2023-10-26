@@ -8,7 +8,7 @@ package deque;
  * 当 (head == last + 1) mod arr.length 时，队列满
  * @param <T>
  */
-public class ArrayDeque<T> {
+public class ArrayDeque<T> implements Deque<T> {
     protected T[] arr;
     protected int head;
     protected int last;
@@ -19,6 +19,7 @@ public class ArrayDeque<T> {
         last = 0;
     }
 
+    @Override
     public void addFirst(T x) {
         if (isFull()) {
             resize(arr.length * 2);
@@ -28,6 +29,7 @@ public class ArrayDeque<T> {
         arr[head] = x;
     }
 
+    @Override
     public void addLast(T x) {
         if (isFull()) {
             resize(arr.length * 2);
@@ -37,6 +39,7 @@ public class ArrayDeque<T> {
         last = (last + 1) % arr.length;
     }
 
+    @Override
     public T removeFirst() {
         if (isEmpty()) {
             return null;
@@ -52,6 +55,7 @@ public class ArrayDeque<T> {
         return x;
     }
 
+    @Override
     public T removeLast() {
         if (isEmpty()) {
             return null;
@@ -67,14 +71,11 @@ public class ArrayDeque<T> {
         return x;
     }
 
-    public boolean isEmpty() {
-        return head == last;
-    }
-
     public boolean isFull() {
         return head == (last + 1) % arr.length;
     }
 
+    @Override
     public int size() {
         return (last - head + arr.length) % arr.length;
     }
@@ -93,6 +94,7 @@ public class ArrayDeque<T> {
         arr = new_arr;
     }
 
+    @Override
     public T get(int i) {
         if (isEmpty() || i >= size()) {
             return null;
@@ -101,6 +103,7 @@ public class ArrayDeque<T> {
         return arr[(head + i) % arr.length];
     }
 
+    @Override
     public void printDeque() {
         int h = head;
         while (arr[h] != null) {
