@@ -41,6 +41,11 @@ public class ArrayDeque<T> {
         if (isEmpty()) {
             return null;
         }
+
+        if (size() > 8 && size() < arr.length / 4) {
+            resize(arr.length / 4);
+        }
+
         T x = arr[head];
         arr[head] = null;
         head = (head + 1) % arr.length;
@@ -51,6 +56,11 @@ public class ArrayDeque<T> {
         if (isEmpty()) {
             return null;
         }
+
+        if (size() > 8 && size() < arr.length / 4) {
+            resize(arr.length / 4);
+        }
+
         last = (last - 1 + arr.length) % arr.length;
         T x = arr[last];
         arr[last] = null;
@@ -79,7 +89,7 @@ public class ArrayDeque<T> {
             i++;
         }
         head = 0;
-        last = i;
+        last = i % arr.length;
         arr = new_arr;
     }
 

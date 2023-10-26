@@ -86,6 +86,7 @@ public class LinkedListDeque<T> {
                 return p.item;
             }
             p = p.next;
+            i --;
         }
     }
 
