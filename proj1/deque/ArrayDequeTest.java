@@ -144,6 +144,10 @@ public class ArrayDequeTest {
         assertEquals("front", ad1.get(0));
         assertEquals("middle", ad1.get(1));
         assertEquals("back", ad1.get(2));
+
+        for (String i : ad1) {
+            System.out.println(i);
+        }
     }
 
     @Test

@@ -1,5 +1,7 @@
 package deque;
 
+import java.util.Iterator;
+
 /**
  * 使用数组实现的双端队列
  * arr[head]是第一个元素
@@ -8,7 +10,7 @@ package deque;
  * 当 (head == last + 1) mod arr.length 时，队列满
  * @param <T>
  */
-public class ArrayDeque<T> implements Deque<T> {
+public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     protected T[] arr;
     protected int head;
     protected int last;
@@ -111,5 +113,29 @@ public class ArrayDeque<T> implements Deque<T> {
             h = (h + 1) % arr.length;
         }
         System.out.println();
+    }
+
+    public class ArrayDequeIterator implements Iterator<T> {
+        int pos;
+        public ArrayDequeIterator() {
+            pos = head;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return pos != last;
+        }
+
+        @Override
+        public T next() {
+            T x = arr[pos];
+            pos = (pos + 1) % arr.length;
+            return x;
+        }
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new ArrayDequeIterator();
     }
 }

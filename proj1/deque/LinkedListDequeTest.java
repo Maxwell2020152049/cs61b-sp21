@@ -119,6 +119,7 @@ public class LinkedListDequeTest {
         }
     }
 
+    @Test
     public void getTest() {
         LinkedListDeque<String> lld1 = new LinkedListDeque<String>();
 
@@ -133,5 +134,18 @@ public class LinkedListDequeTest {
         assertEquals("front", lld1.getRecursive(0));
         assertEquals("middle", lld1.getRecursive(1));
         assertEquals("back", lld1.getRecursive(2));
+    }
+
+    @Test
+    public void iteratorTest() {
+        LinkedListDeque<String> lld1 = new LinkedListDeque<String>();
+
+        lld1.addFirst("front");
+        lld1.addLast("middle");
+        lld1.addLast("back");
+
+        for (String i : lld1) {
+            System.out.println(i);
+        }
     }
 }
