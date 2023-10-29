@@ -11,9 +11,9 @@ import java.util.Iterator;
  * @param <T>
  */
 public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
-    protected T[] arr;
-    protected int head;
-    protected int last;
+    private T[] arr;
+    private int head;
+    private int last;
 
     public ArrayDeque() {
         arr = (T[]) new Object[8];
@@ -73,7 +73,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         return x;
     }
 
-    public boolean isFull() {
+    private boolean isFull() {
         return head == (last + 1) % arr.length;
     }
 
@@ -82,18 +82,18 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         return (last - head + arr.length) % arr.length;
     }
 
-    public void resize(int n) {
-        T[] new_arr = (T[]) new Object[n];
+    private void resize(int n) {
+        T[] newArr = (T[]) new Object[n];
         int h = head;
         int i = 0;
         while (arr[h] != null) {
-            new_arr[i] = arr[h];
+            newArr[i] = arr[h];
             h = (h + 1) % arr.length;
             i++;
         }
         head = 0;
         last = i % arr.length;
-        arr = new_arr;
+        arr = newArr;
     }
 
     @Override
@@ -115,7 +115,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         System.out.println();
     }
 
-    public class ArrayDequeIterator implements Iterator<T> {
+    private class ArrayDequeIterator implements Iterator<T> {
         int pos;
         public ArrayDequeIterator() {
             pos = head;
@@ -137,5 +137,31 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new ArrayDequeIterator();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj instanceof ArrayDeque) {
+            ArrayDeque<T> ad1 = (ArrayDeque<T>) obj;
+            if (this.size() != ad1.size()) {
+                return false;
+            }
+
+            Iterator<T> iterThis = this.iterator();
+            Iterator<T> iterad1 = ad1.iterator();
+            while (iterThis.hasNext()) {
+                if (!iterThis.next().equals(iterad1.next())) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        return false;
     }
 }

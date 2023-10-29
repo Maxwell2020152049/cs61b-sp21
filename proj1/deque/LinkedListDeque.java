@@ -10,7 +10,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         T item;
         Item next;
 
-        Item(Item p ,T i, Item n) {
+        Item(Item p, T i, Item n) {
             prev = p;
             item = i;
             next = n;
@@ -43,7 +43,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         Item temp = new Item(sentinel, x, sentinel.next);
         sentinel.next.prev = temp;
         sentinel.next = temp;
-        size ++;
+        size++;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         Item first = sentinel.next;
         sentinel.next = first.next;
         first.next.prev = sentinel;
-        size --;
+        size--;
         return first.item;
     }
 
@@ -74,7 +74,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         Item last = sentinel.prev;
         sentinel.prev = last.prev;
         last.prev.next = sentinel;
-        size --;
+        size--;
         return last.item;
     }
 
@@ -90,7 +90,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
                 return p.item;
             }
             p = p.next;
-            i --;
+            i--;
         }
     }
 
@@ -108,7 +108,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         System.out.println();
     }
 
-    public class LinkedListDequeIterator implements Iterator<T>{
+    private class LinkedListDequeIterator implements Iterator<T> {
         Item p;
 
         public LinkedListDequeIterator() {
@@ -131,5 +131,31 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new LinkedListDequeIterator();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj instanceof LinkedListDeque) {
+            LinkedListDeque<T> lld1 = (LinkedListDeque<T>) obj;
+            if (this.size() != lld1.size()) {
+                return false;
+            }
+
+            Iterator<T> iterThis = this.iterator();
+            Iterator<T> iterLld1 = lld1.iterator();
+            while (iterThis.hasNext()) {
+                if (!iterThis.next().equals(iterLld1.next())) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        return false;
     }
 }

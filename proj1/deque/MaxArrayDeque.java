@@ -6,8 +6,8 @@ import java.util.Comparator;
  *
  * @param <T>
  */
-public class MaxArrayDeque<T> extends ArrayDeque<T>{
-    Comparator<T> cmp;
+public class MaxArrayDeque<T> extends ArrayDeque<T> {
+    private Comparator<T> cmp;
 
     public MaxArrayDeque(Comparator<T> c) {
         cmp = c;
@@ -22,15 +22,12 @@ public class MaxArrayDeque<T> extends ArrayDeque<T>{
             return null;
         }
 
-        int h = head;
-        T maxx = arr[h];
-        while (arr[h] != null) {
-            if (c.compare(maxx, arr[h]) < 0) {
-                maxx = arr[h];
+        T maxx = null;
+        for (T i : this) {
+            if (maxx == null || c.compare(maxx, i) < 0) {
+                maxx = i;
             }
-            h = (h + 1) % arr.length;
         }
-
         return maxx;
     }
 }

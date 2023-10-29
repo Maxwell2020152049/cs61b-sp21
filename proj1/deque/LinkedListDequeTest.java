@@ -148,4 +148,21 @@ public class LinkedListDequeTest {
             System.out.println(i);
         }
     }
+
+    @Test
+    public void equalsTest() {
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+        LinkedListDeque<Integer> lld2 = new LinkedListDeque<>();
+
+        for (int i = 0; i < 1000000; i++) {
+            lld1.addLast(i);
+            lld2.addLast(i);
+        }
+
+        assertEquals(lld1, lld2);
+
+        lld1.removeFirst();
+
+        assertNotEquals(lld1, lld2);
+    }
 }
