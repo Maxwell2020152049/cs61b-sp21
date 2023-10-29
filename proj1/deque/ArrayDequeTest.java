@@ -207,4 +207,21 @@ public class ArrayDequeTest {
 
         assertNotEquals(ad1, ad2);
     }
+
+    @Test
+    public void equalsTest2() {
+        ArrayDeque<Integer> ad1 = new ArrayDeque<>();
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+
+        for (int i = 0; i < 1000000; i++) {
+            ad1.addLast(i);
+            lld1.addLast(i);
+        }
+
+        assertEquals(ad1, lld1);
+
+        ad1.removeFirst();
+
+        assertNotEquals(ad1, lld1);
+    }
 }
