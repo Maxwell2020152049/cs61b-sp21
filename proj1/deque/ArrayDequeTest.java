@@ -222,5 +222,24 @@ public class ArrayDequeTest {
         ad1.removeFirst();
 
         assertNotEquals(ad1, lld1);
+
+        LinkedListDeque<String> lld2 = new LinkedListDeque<>();
+        ArrayDeque<String> ad2 = new ArrayDeque<>();
+
+        lld2.addLast("20");
+        lld2.addLast("20");
+        lld2.addLast("15");
+        lld2.addLast("20");
+        lld2.addLast("49");
+        lld2.addLast(null);
+
+        ad2.addLast("20");
+        ad2.addLast("20");
+        ad2.addLast("15");
+        ad2.addLast("20");
+        ad2.addLast("49");
+        ad2.addLast(null);
+
+        assertEquals(ad2, lld2);
     }
 }

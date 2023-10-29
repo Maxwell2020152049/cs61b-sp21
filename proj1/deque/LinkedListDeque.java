@@ -148,14 +148,22 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
             Iterator<T> iterThis = this.iterator();
             Iterator<T> iterLld1 = lld1.iterator();
             while (iterThis.hasNext()) {
-                if (!iterThis.next().equals(iterLld1.next())) {
+                T x = iterThis.next();
+                T y = iterLld1.next();
+                if (x == null) {
+                    if (y == null) {
+                        continue;
+                    } else {
+                        return false;
+                    }
+                }
+                if (!x.equals(y)) {
                     return false;
                 }
             }
 
             return true;
-        }
-        else if (obj instanceof ArrayDeque) {
+        } else if (obj instanceof ArrayDeque) {
             ArrayDeque<T> ad1 = (ArrayDeque<T>) obj;
             if (this.size() != ad1.size()) {
                 return false;
@@ -164,7 +172,16 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
             Iterator<T> iterThis = this.iterator();
             Iterator<T> iterAd1 = ad1.iterator();
             while (iterThis.hasNext()) {
-                if (!iterThis.next().equals(iterAd1.next())) {
+                T x = iterThis.next();
+                T y = iterAd1.next();
+                if (x == null) {
+                    if (y == null) {
+                        continue;
+                    } else {
+                        return false;
+                    }
+                }
+                if (!x.equals(y)) {
                     return false;
                 }
             }

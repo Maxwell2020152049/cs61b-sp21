@@ -170,15 +170,35 @@ public class LinkedListDequeTest {
         LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
         ArrayDeque<Integer> ad1 = new ArrayDeque<>();
 
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 10000; i++) {
             lld1.addLast(i);
             ad1.addLast(i);
+            assertEquals(lld1, ad1);
         }
 
-        assertEquals(lld1, ad1);
+        for (int i = 0; i < 10000; i++) {
+            lld1.addFirst(i);
+            ad1.addFirst(i);
+            assertEquals(lld1, ad1);
+        }
 
-        lld1.removeFirst();
+        LinkedListDeque<String> lld2 = new LinkedListDeque<>();
+        ArrayDeque<String> ad2 = new ArrayDeque<>();
 
-        assertNotEquals(lld1, ad1);
+        lld2.addLast("20");
+        lld2.addLast("20");
+        lld2.addLast("15");
+        lld2.addLast("20");
+        lld2.addLast("49");
+        lld2.addLast(null);
+
+        ad2.addLast("20");
+        ad2.addLast("20");
+        ad2.addLast("15");
+        ad2.addLast("20");
+        ad2.addLast("49");
+        ad2.addLast(null);
+
+        assertEquals(lld2, ad2);
     }
 }
