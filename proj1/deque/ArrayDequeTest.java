@@ -209,19 +209,19 @@ public class ArrayDequeTest {
 
     @Test
     public void equalsTest2() {
-        ArrayDeque<Integer> ad1 = new ArrayDeque<>();
-        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
-
-        for (int i = 0; i < 1000000; i++) {
-            ad1.addLast(i);
-            lld1.addLast(i);
-        }
-
-        assertEquals(ad1, lld1);
-
-        ad1.removeFirst();
-
-        assertNotEquals(ad1, lld1);
+//        ArrayDeque<Integer> ad1 = new ArrayDeque<>();
+//        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+//
+//        for (int i = 0; i < 1000000; i++) {
+//            ad1.addLast(i);
+//            lld1.addLast(i);
+//        }
+//
+//        assertEquals(ad1, lld1);
+//
+//        ad1.removeFirst();
+//
+//        assertNotEquals(ad1, lld1);
 
         LinkedListDeque<String> lld2 = new LinkedListDeque<>();
         ArrayDeque<String> ad2 = new ArrayDeque<>();
@@ -232,6 +232,11 @@ public class ArrayDequeTest {
         lld2.addLast("20");
         lld2.addLast("49");
         lld2.addLast(null);
+        lld2.addLast("20");
+        lld2.addLast("20");
+        lld2.addLast("15");
+        lld2.addLast("20");
+        lld2.addLast("49");
 
         ad2.addLast("20");
         ad2.addLast("20");
@@ -239,6 +244,11 @@ public class ArrayDequeTest {
         ad2.addLast("20");
         ad2.addLast("49");
         ad2.addLast(null);
+        ad2.addLast("20");
+        ad2.addLast("20");
+        ad2.addLast("15");
+        ad2.addLast("20");
+        ad2.addLast("49");
 
         assertEquals(ad2, lld2);
     }

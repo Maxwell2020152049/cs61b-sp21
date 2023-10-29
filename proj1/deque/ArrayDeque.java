@@ -84,9 +84,10 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
     private void resize(int n) {
         T[] newArr = (T[]) new Object[n];
+
         int h = head;
         int i = 0;
-        while (arr[h] != null) {
+        while (h != last) {
             newArr[i] = arr[h];
             h = (h + 1) % arr.length;
             i++;
@@ -108,7 +109,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     @Override
     public void printDeque() {
         int h = head;
-        while (arr[h] != null) {
+        while (h != last) {
             System.out.print(arr[h] + " ");
             h = (h + 1) % arr.length;
         }
