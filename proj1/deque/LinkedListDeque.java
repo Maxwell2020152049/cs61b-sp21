@@ -139,7 +139,8 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
             return true;
         }
 
-        if (obj instanceof LinkedListDeque lld1) {
+        if (obj instanceof LinkedListDeque) {
+            LinkedListDeque<T> lld1 = (LinkedListDeque<T>) obj;
             if (this.size() != lld1.size()) {
                 return false;
             }
@@ -154,7 +155,8 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 
             return true;
         }
-        else if (obj instanceof ArrayDeque ad1) {
+        else if (obj instanceof ArrayDeque) {
+            ArrayDeque<T> ad1 = (ArrayDeque<T>) obj;
             if (this.size() != ad1.size()) {
                 return false;
             }
