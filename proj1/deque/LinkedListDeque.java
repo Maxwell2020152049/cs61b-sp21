@@ -1,5 +1,6 @@
 package deque;
 
+import java.util.ArrayDeque;
 import java.util.Iterator;
 
 public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
@@ -111,7 +112,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     private class LinkedListDequeIterator implements Iterator<T> {
         Item p;
 
-        public LinkedListDequeIterator() {
+        LinkedListDequeIterator() {
             p = sentinel.next;
         }
 
@@ -139,7 +140,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
             return true;
         }
 
-        if (obj instanceof LinkedListDeque) {
+        if (obj instanceof Deque) {
             LinkedListDeque<T> lld1 = (LinkedListDeque<T>) obj;
             if (this.size() != lld1.size()) {
                 return false;
