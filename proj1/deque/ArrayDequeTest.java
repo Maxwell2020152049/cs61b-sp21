@@ -154,38 +154,44 @@ public class ArrayDequeTest {
         ArrayDeque<Integer> ad1 = new ArrayDeque<>();
         LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
 
-        final int N = 1000000;
+        final int N = 10000;
 
         for (int i = 0; i < N; i++) {
-            int operationNumber = StdRandom.uniform(0, 6);
+            int operationNumber = StdRandom.uniform(0, 9);
             if (operationNumber == 0) {
                 // addLast
                 int randVal = StdRandom.uniform(0, 100);
                 ad1.addLast(randVal);
                 lld1.addLast(randVal);
-            }
-            else if (operationNumber == 1) {
+            } else if (operationNumber == 1) {
                 // addFirst
                 int randVal = StdRandom.uniform(0, 100);
                 ad1.addFirst(randVal);
                 lld1.addFirst(randVal);
-            }
-            else if (operationNumber == 2) {
+            } else if (operationNumber == 2) {
                 // removeLast
                 assertEquals(lld1.removeLast(), ad1.removeLast());
-            }
-            else if (operationNumber == 3) {
+            } else if (operationNumber == 3) {
                 // removeFirst
                 assertEquals(lld1.removeFirst(), ad1.removeFirst());
-            }
-            else if (operationNumber == 4) {
+            } else if (operationNumber == 4) {
                 // size
                 assertEquals(lld1.size(), lld1.size());
-            }
-            else if (operationNumber == 5) {
+            } else if (operationNumber == 5) {
                 // get
                 int randVal = StdRandom.uniform(0, 10000);
                 assertEquals(lld1.get(randVal), ad1.get(randVal));
+            } else if (operationNumber == 6) {
+                // equals
+                assertEquals(ad1, lld1);
+            } else if (operationNumber == 7) {
+                // addLast null
+                lld1.addLast(null);
+                ad1.addLast(null);
+            } else if (operationNumber == 8) {
+                // addFirst null
+                lld1.addFirst(null);
+                ad1.addFirst(null);
             }
         }
     }

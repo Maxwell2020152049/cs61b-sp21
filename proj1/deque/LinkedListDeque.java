@@ -133,62 +133,93 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         return new LinkedListDequeIterator();
     }
 
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (this == obj) {
+//            return true;
+//        }
+//
+//        if (obj instanceof LinkedListDeque) {
+//            LinkedListDeque<T> lld1 = (LinkedListDeque<T>) obj;
+//            if (this.size() != lld1.size()) {
+//                return false;
+//            }
+//
+//            Iterator<T> iterThis = this.iterator();
+//            Iterator<T> iterLld1 = lld1.iterator();
+//            while (iterThis.hasNext()) {
+//                T x = iterThis.next();
+//                T y = iterLld1.next();
+//                if (x == null) {
+//                    if (y == null) {
+//                        continue;
+//                    } else {
+//                        return false;
+//                    }
+//                }
+//                if (!x.equals(y)) {
+//                    return false;
+//                }
+//            }
+//
+//            return true;
+//        } else if (obj instanceof ArrayDeque) {
+//            ArrayDeque<T> ad1 = (ArrayDeque<T>) obj;
+//            if (this.size() != ad1.size()) {
+//                return false;
+//            }
+//
+//            Iterator<T> iterThis = this.iterator();
+//            Iterator<T> iterAd1 = ad1.iterator();
+//            while (iterThis.hasNext()) {
+//                T x = iterThis.next();
+//                T y = iterAd1.next();
+//                if (x == null) {
+//                    if (y == null) {
+//                        continue;
+//                    } else {
+//                        return false;
+//                    }
+//                }
+//                if (!x.equals(y)) {
+//                    return false;
+//                }
+//            }
+//
+//            return true;
+//        }
+//
+//        return false;
+//    }
+
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-
-        if (obj instanceof LinkedListDeque) {
-            LinkedListDeque<T> lld1 = (LinkedListDeque<T>) obj;
-            if (this.size() != lld1.size()) {
-                return false;
-            }
-
-            Iterator<T> iterThis = this.iterator();
-            Iterator<T> iterLld1 = lld1.iterator();
-            while (iterThis.hasNext()) {
-                T x = iterThis.next();
-                T y = iterLld1.next();
-                if (x == null) {
-                    if (y == null) {
-                        continue;
-                    } else {
-                        return false;
-                    }
-                }
-                if (!x.equals(y)) {
+        if (o == null) {
+            return false;
+        }
+        if (!(o instanceof Deque)) {
+            return false;
+        }
+        Deque<T> ol = (Deque<T>) o;
+        if (ol.size() != this.size()) {
+            return false;
+        }
+        for (int i = 0; i < size; i++) {
+            if (ol.get(i) == null) {
+                if (this.get(i) == null) {
+                    continue;
+                } else {
                     return false;
                 }
             }
 
-            return true;
-        } else if (obj instanceof ArrayDeque) {
-            ArrayDeque<T> ad1 = (ArrayDeque<T>) obj;
-            if (this.size() != ad1.size()) {
+            if (!(ol.get(i).equals(this.get(i)))) {
                 return false;
             }
-
-            Iterator<T> iterThis = this.iterator();
-            Iterator<T> iterAd1 = ad1.iterator();
-            while (iterThis.hasNext()) {
-                T x = iterThis.next();
-                T y = iterAd1.next();
-                if (x == null) {
-                    if (y == null) {
-                        continue;
-                    } else {
-                        return false;
-                    }
-                }
-                if (!x.equals(y)) {
-                    return false;
-                }
-            }
-
-            return true;
         }
-
-        return false;
+        return true;
     }
 }

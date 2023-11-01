@@ -1,5 +1,6 @@
 package deque;
 
+import edu.princeton.cs.algs4.StdRandom;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -210,5 +211,99 @@ public class LinkedListDequeTest {
         ad2.addLast("49");
 
         assertEquals(lld2, ad2);
+    }
+
+    @Test
+    public void randomTest() {
+        ArrayDeque<Integer> ad1 = new ArrayDeque<>();
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+
+        final int N = 1000000;
+
+        for (int i = 0; i < N; i++) {
+            int operationNumber = StdRandom.uniform(0, 9);
+            if (operationNumber == 0) {
+                // addLast
+                int randVal = StdRandom.uniform(0, 100);
+                ad1.addLast(randVal);
+                lld1.addLast(randVal);
+            } else if (operationNumber == 1) {
+                // addFirst
+                int randVal = StdRandom.uniform(0, 100);
+                ad1.addFirst(randVal);
+                lld1.addFirst(randVal);
+            } else if (operationNumber == 2) {
+                // removeLast
+                assertEquals(lld1.removeLast(), ad1.removeLast());
+            } else if (operationNumber == 3) {
+                // removeFirst
+                assertEquals(lld1.removeFirst(), ad1.removeFirst());
+            } else if (operationNumber == 4) {
+                // size
+                assertEquals(lld1.size(), lld1.size());
+            } else if (operationNumber == 5) {
+                // get
+                int randVal = StdRandom.uniform(0, 10000);
+                assertEquals(lld1.get(randVal), ad1.get(randVal));
+            } else if (operationNumber == 6) {
+                // equals
+                assertEquals(lld1, ad1);
+            } else if (operationNumber == 7) {
+                // addLast null
+                ad1.addLast(null);
+                lld1.addLast(null);
+            } else if (operationNumber == 8) {
+                // addFirst null
+                ad1.addFirst(null);
+                lld1.addFirst(null);
+            }
+        }
+    }
+
+    @Test
+    public void randomTest2() {
+        ArrayDeque<String> ad1 = new ArrayDeque<>();
+        LinkedListDeque<String> lld1 = new LinkedListDeque<>();
+
+        final int N = 10000;
+
+        for (int i = 0; i < N; i++) {
+            int operationNumber = StdRandom.uniform(0, 9);
+            if (operationNumber == 0) {
+                // addLast
+                int randVal = StdRandom.uniform(0, 100);
+                ad1.addLast(String.valueOf(randVal));
+                lld1.addLast(String.valueOf(randVal));
+            } else if (operationNumber == 1) {
+                // addFirst
+                int randVal = StdRandom.uniform(0, 100);
+                ad1.addFirst(String.valueOf(randVal));
+                lld1.addFirst(String.valueOf(randVal));
+            } else if (operationNumber == 2) {
+                // removeLast
+                assertEquals(lld1.removeLast(), ad1.removeLast());
+            } else if (operationNumber == 3) {
+                // removeFirst
+                assertEquals(lld1.removeFirst(), ad1.removeFirst());
+            } else if (operationNumber == 4) {
+                // size
+                assertEquals(lld1.size(), lld1.size());
+            } else if (operationNumber == 5) {
+                // get
+                int randVal = StdRandom.uniform(0, 10000);
+                assertEquals(lld1.get(randVal), ad1.get(randVal));
+            } else if (operationNumber == 6) {
+                // equals
+                assertEquals(lld1, ad1);
+            } else if (operationNumber == 7) {
+                // addLast null
+                ad1.addLast(null);
+                lld1.addLast(null);
+            } else if (operationNumber == 8) {
+                // addFirst null
+                ad1.addFirst(null);
+                lld1.addFirst(null);
+            }
+        }
     }
 }
