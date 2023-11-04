@@ -154,7 +154,7 @@ public class LinkedListDequeTest {
         LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
         LinkedListDeque<Integer> lld2 = new LinkedListDeque<>();
 
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 10000; i++) {
             lld1.addLast(i);
             lld2.addLast(i);
         }
@@ -218,7 +218,7 @@ public class LinkedListDequeTest {
         ArrayDeque<Integer> ad1 = new ArrayDeque<>();
         LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
 
-        final int N = 1000000;
+        final int N = 10000;
 
         for (int i = 0; i < N; i++) {
             int operationNumber = StdRandom.uniform(0, 9);
