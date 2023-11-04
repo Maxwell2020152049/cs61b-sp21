@@ -9,11 +9,10 @@ import student.StudentArrayDeque;
 import java.util.ArrayDeque;
 
 public class TestArrayDequeEC {
-    private String Operations = "";
-
     @Test
     public void testArrayDeque() {
         final int N = 1000000;
+        String Operations = "";
 
         ArrayDequeSolution<Integer> ads1 = new ArrayDequeSolution<>();
         StudentArrayDeque<Integer> sad1 = new StudentArrayDeque<>();
@@ -56,5 +55,9 @@ public class TestArrayDequeEC {
                 assertEquals(Operations, ads1.removeLast(), sad1.removeLast());
             }
         }
+    }
+
+    public static void main(String[] args) {
+        jh61b.junit.TestRunner.runTests(TestArrayDequeEC.class);
     }
 }
