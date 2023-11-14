@@ -37,12 +37,12 @@ public class CapersRepository {
          * 否则, 跳过. */
         File dot_capers = Utils.join(CAPERS_FOLDER, ".capers");
         if (!dot_capers.exists()) {
-            dot_capers.mkdir();
+            dot_capers.mkdirs();
         }
 
         File dogs = Utils.join(dot_capers, "dogs");
         if (!dogs.exists()) {
-            dogs.mkdir();
+            dogs.mkdirs();
         }
 
         File story = Utils.join(dot_capers, "story");
