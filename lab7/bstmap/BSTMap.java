@@ -47,7 +47,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>{
         }
         if (bst.key.compareTo(key) == 0) {
             return true;
-        } else if (bst.key.compareTo(key) < 0) {
+        } else if (bst.key.compareTo(key) > 0) {
             return contain(bst.lchild, key);
         } else {
             return contain(bst.rchild, key);
@@ -68,7 +68,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>{
     private V get1(BSTNode<K, V> bst, K key) {
         if (bst.key.compareTo(key) == 0) {
             return bst.value;
-        } else if (bst.key.compareTo(key) < 0) {
+        } else if (bst.key.compareTo(key) > 0) {
             return get1(bst.lchild, key);
         } else {
             return get1(bst.rchild, key);
@@ -92,9 +92,9 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>{
         if (bst == null) {
             return new BSTNode<K, V>(key, value);
         }
-        if (bst.key.compareTo(key) < 0) {
+        if (bst.key.compareTo(key) > 0) {
             bst.lchild = insert(bst.lchild, key, value);
-        } else if (bst.key.compareTo(key) > 0) {
+        } else if (bst.key.compareTo(key) < 0) {
             bst.rchild = insert(bst.rchild, key, value);
         } else {
             bst.value = value;
@@ -114,7 +114,35 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>{
      * UnsupportedOperationException. */
     @Override
     public V remove(K key) {
-        throw new UnsupportedOperationException();
+        V value = get(key);
+        if (value != null) {
+            root = delete(root, key);
+            size --;
+        }
+        return value;
+    }
+
+    private BSTNode<K, V> delete(BSTNode<K, V> bst, K key) {
+        if (bst.key.compareTo(key) == 0) {
+            if (bst.lchild == null) {
+                bst = bst.rchild;
+            } else if (bst.rchild == null) {
+                bst = bst.lchild;
+            } else {
+                BSTNode<K, V> pre = bst.lchild;
+                while (pre.rchild != null) {
+                    pre = pre.rchild;
+                }
+                bst = delete(bst, pre.key);
+                bst.key = pre.key;
+                bst.value = pre.value;
+            }
+        } else if (bst.key.compareTo(key) > 0) {
+            bst.lchild = delete(bst.lchild, key);
+        } else {
+            bst.rchild = delete(bst.rchild, key);
+        }
+        return bst;
     }
 
     /* Removes the entry for the specified key only if it is currently mapped to
@@ -122,7 +150,12 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>{
      * throw an UnsupportedOperationException.*/
     @Override
     public V remove(K key, V value) {
-        throw new UnsupportedOperationException();
+        if (get(key) == value) {
+            remove(key);
+            size --;
+            return value;
+        }
+        return null;
     }
 
     @Override
