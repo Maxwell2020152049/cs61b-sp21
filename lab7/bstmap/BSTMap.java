@@ -1,5 +1,6 @@
 package bstmap;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -106,7 +107,18 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>{
      * If you don't implement this, throw an UnsupportedOperationException. */
     @Override
     public Set<K> keySet() {
-        throw new UnsupportedOperationException();
+        HashSet<K> set = new HashSet<>();
+        keySet1(root, set);
+        return set;
+    }
+
+    private void keySet1(BSTNode<K, V> bst, HashSet<K> set) {
+        if (bst == null) {
+            return;
+        }
+        set.add(bst.key);
+        keySet1(bst.lchild, set);
+        keySet1(bst.rchild, set);
     }
 
     /* Removes the mapping for the specified key from this map if present.
